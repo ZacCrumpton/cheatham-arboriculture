@@ -326,12 +326,12 @@ export default function App() {
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: palette.heading }}>Recent Work</h2>
             <GalleryCarousel
               images={[
-                "https://imgs.search.brave.com/IukX1T1E-uguArvY1NMrAiNJDe307vdTm-bWRk8RYnM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9wZW9w/bGUtY3V0dGluZy1k/b3duLXRyZWVzLWNo/YWluc2F3LWVuZ2lu/ZS1wZW9wbGUtY3V0/dGluZy1kb3duLXRy/ZWVzLWNoYWluc2F3/LWVuZ2luZS0xMzc0/MDk0NzIuanBn",
-                "https://imgs.search.brave.com/htY0aTkQq12h2cvPyqd33M0jU_18RrS736KCFCU-SVo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9jdXR0/aW5nLWRvd24tdHJl/ZXMtMjgwNzkzMjMu/anBn",
-                "https://imgs.search.brave.com/4JUSlHBEM6fngR3f-I3fk1UR7_TO3fm72TF3eY0oxFo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODI4/MDUwNzY0L3Bob3Rv/L21hbi11c2luZy1j/aGFpbnNhdy10by1j/dXQtbGltYi1mcm9t/LWRlYWQtb2FrLXRy/ZWUtbGFyZ2Utc2Vj/dGlvbi1mYWxscy10/by1ncm91bmQuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPWly/MFVOUFlqb2ZJWklX/WDY4azdHNzhmMEJv/bEVsdHdJZlFJdENM/Njd2ZjA9",
-                "https://imgs.search.brave.com/dxu4rOLgFsZ7pHdy-46eBk5ZFU8i09b7mWEZoCsiCCU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE4/NzQyMDAxOC9waG90/by9yZWFyLXZpZXctb2YtYXJib3Jpc3QtbWVuLXdpdGgtY2hhaW5zYXctY3V0dGluZy1hLXRyZWUtcGxhbm5pbmcuanBnP3M9NjEyeDYxMiZ3PTAmaz0yMCZjPWVxYWtQY2ZnZVN3SG1rSmpYdm1fMDB6WW56UzlhS3JxLTVBSHZvUy1XSlU9",
-                "https://imgs.search.brave.com/Hx3SmnQiNnfXSLytkBV_CD3ehK0kbpOZ-Fpk1eLDfX4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cuYWR2YW50YWdldHJlZWNhcmUuY2Evd3AtY29udGVudC91cGxvYWRzLzIwMjIvMDUvV2hhdC1kby1hbi1hcmJvcmlzdC1kby5qcGc",
-                "https://imgs.search.brave.com/7bik7gk8N3tJVQp259hqrjB1qADBc2fLP-75T--r43c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdDMuZGVwb3NpdHBob3Rvcy5jb20vMTEyNzc2MTYvMTY2OTcvaS80NTAvZGVwb3NpdHBob3Rvc18xNjY5NzY1Nzgtc3RvY2stcGhvdG8tYXJib3Jpc3QtYXQtd29yay5qcGc",
+                "images/cheathamArbor1.avif",
+                "images/cheathamArbor2.avif",
+                "images/cheathamArbor8.avif",
+                "images/cheathamArbor9.avif",
+                "images/cheathamArbor3.avif",
+                "images/cheathamArbor4.avif",
               ]}
               borderColor={palette.border}
             />
@@ -406,7 +406,7 @@ export default function App() {
         aria-label="International Society of Arboriculture Member"
         className="fixed right-4 bottom-4 z-40"
       >
-        <img src="/isa-badge.png" alt="ISA Member" className="w-16 h-16 md:w-20 md:h-20 drop-shadow" />
+        <img src="https://imgs.search.brave.com/03eum2Soh9BrFWKE-K5rQ1MfwsLXh4d0X_ezRV5aUx0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9uZXdl/bmdsYW5kaXNhLm9y/Zy9zaXRlcy9kZWZh/dWx0L2ZpbGVzL2lu/bGluZS1pbWFnZXMv/SVNBX01lbWJlckxv/Z29QYWNrYWdlX0Zp/bmFsLmpwZw" alt="ISA Member" className="w-16 h-16 md:w-20 md:h-20 drop-shadow" />
       </a>
 
       {/* Dev theme helper (optional): quickly toggle themes by editing THEME constant) */}
@@ -494,30 +494,35 @@ function GalleryCarousel({ images = [], borderColor = "#ddd" }) {
       >
         <div
           ref={trackRef}
-          className="flex"
+          className="flex items-center"
           style={{
-            width: `${slides.length * 100}%`,
-            transform: `translateX(-${index * (100 / slides.length)}%)`,
+            width: `${slides.length * 240}px`, // match your card width * number of slides
+            transform: `translateX(-${index * 240}px)`,
             transition: isAnimating
               ? "transform 600ms cubic-bezier(.22,.61,.36,1)"
               : "none",
           }}
         >
+
           {slides.map((src, i) => (
             <div
               key={`${src}-${i}`}
-              className="w-full shrink-0"
-              style={{ width: `${100 / slides.length}%` }}
+              className="shrink-0 w-[180px] sm:w-[200px] md:w-[240px] mx-2"
             >
-              <div className="h-64 md:h-80">
+              <div className="aspect-[3/4] overflow-hidden rounded-lg bg-white shadow">
                 <img
                   src={src}
                   alt="Project image"
-                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  className="h-full w-full object-cover"
                 />
               </div>
             </div>
           ))}
+
+
         </div>
       </div>
 
