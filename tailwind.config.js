@@ -7,6 +7,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/aspect-reatio')],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 }
 
