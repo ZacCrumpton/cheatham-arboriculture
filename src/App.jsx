@@ -203,9 +203,10 @@ export default function App() {
         <div className="relative h-[70svh] md:h-[70svh] xl:h-[80svh] 2xl:[90svh] overflow-hidden">
           <div
             ref={heroRef}
-            className="absolute inset-0 will-change-form bg-[url('images/header.jpg')] bg-cover bg-center bg-fixed scale-105" 
+            className="absolute inset-0 will-change-form bg-cover bg-center bg-fixed scale-105"
+            style={{ backgroundImage: "url('/images/header.jpg')"}}
             role="img"
-            aria-label="Mature neighborhood trees"
+            aria-label="Arborist safely removing tree branch"
           />
           {/* Soft overlay to harmonize with theme */}
           <div
