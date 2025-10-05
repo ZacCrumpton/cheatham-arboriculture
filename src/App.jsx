@@ -1,5 +1,7 @@
 // src/App.jsx
 import { useEffect, useMemo, useState, useRef } from "react";
+import AutoScrollGallery from "./components/AutoScrollGallery";
+import LogoMark from "./components/LogoMark";
 
 // Pick one: "modern" | "rustic" | "bold"
 const THEME = "bold";
@@ -164,8 +166,7 @@ export default function App() {
   };
 
     const heroRef = useParallaxRelative(0.25);
-    const galleryRef = useParallaxRelative(0.18);
-
+    
   return (
     <div
       className="min-h-dvh"
@@ -199,10 +200,10 @@ export default function App() {
 
       {/* Hero */}
       <section id="top" className="relative">
-        <div className="relative h-[58svh] md:h-[70svh] overflow-hidden">
+        <div className="relative h-[70svh] md:h-[70svh] xl:h-[80svh] 2xl:[90svh] overflow-hidden">
           <div
             ref={heroRef}
-            className="absolute inset-0 will-change-form bg-[url('https://newdayarborist.com/wp-content/uploads/2024/06/Arborist-climbing-tree.jpg')] bg-cover bg-top bg-fixed scale-105" 
+            className="absolute inset-0 will-change-form bg-[url('images/header.jpg')] bg-cover bg-center bg-fixed scale-105" 
             role="img"
             aria-label="Mature neighborhood trees"
           />
@@ -210,9 +211,23 @@ export default function App() {
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(180deg, ${hexWithAlpha(palette.pageBgFrom, 0.7)}, ${hexWithAlpha(palette.pageBgTo, 0.85)})`
+              background: `linear-gradient(180deg, ${hexWithAlpha(palette.sectionMid, 0.7)}, ${hexWithAlpha(palette.pageBgTo, 0.85)})`
             }}
           />
+
+              {/* Animated, scroll-drifting logo layer */}
+            <LogoMark
+              src="images/cheatham-logo.svg"   // logo here
+              corner="center"                 // "tl" | "tr" | "bl" | "br" | "center"
+              imgClassName="!w-[150vw] sm:!w-[150vw] md:!w-[160vw] lg:!w-[54vw] xl:!w-[52vw] 2xl:!w-[60vw] max-w-[2200px] h-auto"        // tweak: 96–160
+              offsetY={-6}
+              parallax={0.12}                  // lower = subtler drift              
+              popDuration={1500}
+              scrim = {false}
+              //scrimColor={hexWithAlpha(palette.sectionLight, 0.82)}
+              //scrimRing={hexWithAlpha(palette.border, 0.9)}
+            />
+
         </div>
         <div className="max-w-7xl mx-auto px-4 -mt-28 md:-mt-36 relative pb-10">
           <div
@@ -223,7 +238,7 @@ export default function App() {
               Welcome to Cheatham Arboriculture
             </h1>
             <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: palette.muted }}>
-              Here, trees are more than just our work - they're our passion. As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every profect. Our licensed and insured team is dedicated to keepying your trees healthy, dafe, and beautiful while supporting long-term sustainability for our enviornment.
+              Trees are more than just our work - they're our passion. As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every project. Our licensed and insured team is dedicated to keeping your trees healthy, safe, and beautiful while supporting long-term sustainability for our enviornment.
               <br></br>
               <br></br>We are a small, close-knit crew that treats every propety as if it were our own. 
               Whether it's precision pruning, safe tree removal, or planting the next generation of saplings, we approach each job with professionalism and respect for nature.
@@ -249,16 +264,17 @@ export default function App() {
       </section>
 
       <main id="main">
+
         {/* Services */}
-        <section id="services" className="scroll-mt-28 py-16">
+        <section id="services" className="scroll-mt-28 py-4">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: "#FFFFFF" }}>Services</h2>
             <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[ 
-                { t:"Tree Trimming & Pruning", d:"Encouraging healthy growth and enchancing safety." },
+                { t:"Tree Trimming & Pruning", d:"Encouraging healthy growth and enhancing safety." },
                 { t:"Tree Removals & Brush Hauling", d:"Safe, efficient clearing with complete cleanup." },
                 { t:"Storm Damage Cleanup", d:"Fast reliable response when you need it most." },
-                { t:"Stump Grinding", d:"Removing hazard and making way for new growth." },
+                { t:"Stump Grinding", d:"Removing hazards and making way for new growth." },
                 { t:"Sapling Planting & Care", d:"Helping young trees thrive for years to come." },
               ].map((s) => (
                 <div
@@ -281,7 +297,7 @@ export default function App() {
             
             <ol className="mt-6 space-y-8">
               {[
-                { n: 1, t: "Assess", d: "On-site walk-through with an ISA-certified arborist." },
+                { n: 1, t: "Assess", d: "On-site walk-through with an ISA-Member arborist." },
                 { n: 2, t: "Plan", d: "Clear scope, price, and timeline before work begins." },
                 { n: 3, t: "Perform & Clean", d: "Rigged removals, careful pruning, thorough cleanup." },
               ].map(({ n, t, d }) => (
@@ -307,36 +323,31 @@ export default function App() {
         </section>
 
         {/* Gallery */}
-        <section id="gallery"
-        className="scroll-mt-28 py-16 relative overflow-hidden"
-        style={{ backgroundColor: palette.sectionLight }}>
-          <div 
-          ref={galleryRef}
-          className="absolute inset-0 will-change-transform bg-[url('https://oregonforests.org/sites/default/files/2023-08/1.4.4_TreeBiology_0.jpg')] bg-cover bg-center"
-          role='img'
-          aria-label='tree trunk background'
-          style={{ zIndex: 0, transform: "scale(1.05)"}}
-          />
-            <div
-              className="absolute inset-0"
-              style={{background: "linear-gradient(180deg, rgba(243,245,242,.75), rgba(233,239,233,.85)", zIndex:0}}
-            />
-            {/*Foreground content*/}
-          <div className='relative max-w-7xl mx-auto px-4' style={{zIndex:1}}>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: palette.heading }}>Recent Work</h2>
-            <GalleryCarousel
-              images={[
-                "images/cheathamArbor1.avif",
-                "images/cheathamArbor2.avif",
-                "images/cheathamArbor8.avif",
-                "images/cheathamArbor9.avif",
-                "images/cheathamArbor3.avif",
-                "images/cheathamArbor4.avif",
-              ]}
-              borderColor={palette.border}
-            />
+        <section id="gallery" className="scroll-mt-28 py-16">
+          <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: palette.heading }}>
+            Recent Work
+          </h2>
           </div>
+          <AutoScrollGallery
+            images={[
+              "images/cheathamArbor1.avif",
+              "images/cheathamArbor2.avif",
+              "images/cheathamArbor8.avif",
+              "images/cheathamArbor9.avif",
+              "images/cheathamArbor3.avif",
+              "images/cheathamArbor4.avif",
+            ]}
+            borderColor={palette.border}
+            speed={70}             // px/sec; tweak to taste
+            gap={12}               // px between cards
+            showControls={true}    // keep the arrows
+            // itemWidthClasses="w-[180px] sm:w-[200px] md:w-[240px]" // (same as default)
+          />
+          
         </section>
+          
+
 
         {/* Free Estimate CTA */}
         <section className="py-16">
@@ -350,7 +361,7 @@ export default function App() {
             >
               <div>
                 <h3 className="text-2xl md:text-3xl font-semibold">Free on-site estimate in Greater Nashville</h3>
-                <p className="mt-2 opacity-90">Small, local crew • ISA-Certified • Respect for your property</p>
+                <p className="mt-2 opacity-90">Small, local crew • ISA-Member • Respect for your property</p>
               </div>
               <a
                 href="tel:+13145360225"
@@ -406,11 +417,11 @@ export default function App() {
         aria-label="International Society of Arboriculture Member"
         className="fixed right-4 bottom-4 z-40"
       >
-        <img src="https://imgs.search.brave.com/03eum2Soh9BrFWKE-K5rQ1MfwsLXh4d0X_ezRV5aUx0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9uZXdl/bmdsYW5kaXNhLm9y/Zy9zaXRlcy9kZWZh/dWx0L2ZpbGVzL2lu/bGluZS1pbWFnZXMv/SVNBX01lbWJlckxv/Z29QYWNrYWdlX0Zp/bmFsLmpwZw" alt="ISA Member" className="w-16 h-16 md:w-20 md:h-20 drop-shadow" />
+        <img src="images/isa.jpg" alt="ISA Member" className="w-16 h-16 md:w-20 md:h-20 drop-shadow" />
       </a>
 
       {/* Dev theme helper (optional): quickly toggle themes by editing THEME constant) */}
-      <div className="fixed left-2 bottom-2 text-xs opacity-60 select-none" title={`Theme: ${palette.name}`}>Theme: {palette.name}</div>
+      <div className="fixed left-2 bottom-2 text-xs opacity-60 select-none" title={`Theme: ${palette.name}`}></div>
     </div>
   );
 }
@@ -424,144 +435,4 @@ function hexWithAlpha(hex, alpha = 1) {
   const g = parseInt(res[2], 16);
   const b = parseInt(res[3], 16);
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-function GalleryCarousel({ images = [], borderColor = "#ddd" }) {
-  const [index, setIndex] = useState(1);       // start at first real slide (after leading clone)
-  const [isAnimating, setAnimating] = useState(true);
-  const [paused, setPaused] = useState(false);
-  const trackRef = useRef(null);
-
-  // Build cloned edges for seamless loop
-  const slides = useMemo(() => {
-    if (!images.length) return [];
-    return [images[images.length - 1], ...images, images[0]];
-  }, [images]);
-
-  // Autoplay
-  useEffect(() => {
-    if (paused || !slides.length) return;
-    const id = setInterval(() => {
-      setIndex((i) => i + 1);
-      setAnimating(true);
-    }, 3500);
-    return () => clearInterval(id);
-  }, [paused, slides.length]);
-
-  // Handle transition end for infinite wrap
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const onEnd = () => {
-      if (index === slides.length - 1) {
-        setAnimating(false);
-        setIndex(1);
-      } else if (index === 0) {
-        setAnimating(false);
-        setIndex(slides.length - 2);
-      }
-    };
-    el.addEventListener("transitionend", onEnd);
-    return () => el.removeEventListener("transitionend", onEnd);
-  }, [index, slides.length]);
-
-  // Re-enable animation after a jump
-  useEffect(() => {
-    if (isAnimating) return;
-    const id = requestAnimationFrame(() => setAnimating(true));
-    return () => cancelAnimationFrame(id);
-  }, [isAnimating]);
-
-  const go = (dir) => {
-    setAnimating(true);
-    setIndex((i) => i + dir);
-  };
-
-  const realIndex =
-    images.length ? (index - 1 + images.length) % images.length : 0;
-
-  return (
-    <div
-      className="relative mt-6 select-none"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      aria-roledescription="carousel"
-      aria-label="Project gallery"
-    >
-      {/* Track */}
-      <div
-        className="overflow-hidden rounded-xl"
-        style={{ border: `1px solid ${borderColor}` }}
-      >
-        <div
-          ref={trackRef}
-          className="flex items-center"
-          style={{
-            width: `${slides.length * 240}px`, // match your card width * number of slides
-            transform: `translateX(-${index * 240}px)`,
-            transition: isAnimating
-              ? "transform 600ms cubic-bezier(.22,.61,.36,1)"
-              : "none",
-          }}
-        >
-
-          {slides.map((src, i) => (
-            <div
-              key={`${src}-${i}`}
-              className="shrink-0 w-[180px] sm:w-[200px] md:w-[240px] mx-2"
-            >
-              <div className="aspect-[3/4] overflow-hidden rounded-lg bg-white shadow">
-                <img
-                  src={src}
-                  alt="Project image"
-                  loading="lazy"
-                  decoding="async"
-                  draggable="false"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          ))}
-
-
-        </div>
-      </div>
-
-      {/* Prev/Next */}
-      <button
-        type="button"
-        aria-label="Previous slide"
-        onClick={() => go(-1)}
-        className="absolute left-2 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-full backdrop-blur bg-white/70 hover:bg-white shadow"
-      >
-        ‹
-      </button>
-      <button
-        type="button"
-        aria-label="Next slide"
-        onClick={() => go(1)}
-        className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-full backdrop-blur bg-white/70 hover:bg-white shadow"
-      >
-        ›
-      </button>
-
-      {/* Dots */}
-      <div className="mt-3 flex items-center justify-center gap-2">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              setIndex(i + 1);
-              setAnimating(true);
-            }}
-            aria-label={`Go to slide ${i + 1}`}
-            className="w-2.5 h-2.5 rounded-full"
-            style={{
-              backgroundColor:
-                i === realIndex ? "rgba(30,86,48,.9)" : "rgba(30,86,48,.25)",
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
 }
