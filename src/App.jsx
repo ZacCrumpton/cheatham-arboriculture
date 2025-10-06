@@ -236,10 +236,10 @@ export default function App() {
             style={{ backgroundColor: hexWithAlpha(palette.cardBg, 0.95), border: `1px solid ${palette.border}` }}
           >
             <h1 className="text-3xl md:text-5xl font-semibold tracking-tight" style={{ color: palette.heading }}>
-              Welcome to Cheatham Arboriculture
+              Trees Are Our Passion.
             </h1>
             <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: palette.muted }}>
-              Trees are more than just our work - they're our passion. As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every project. Our licensed and insured team is dedicated to keeping your trees healthy, safe, and beautiful while supporting long-term sustainability for our enviornment.
+              As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every project. Our licensed and insured team is dedicated to keeping your trees healthy, safe, and beautiful while supporting long-term sustainability for our enviornment.
               <br></br>
               <br></br>We are a small, close-knit crew that treats every propety as if it were our own. 
               Whether it's precision pruning, safe tree removal, or planting the next generation of saplings, we approach each job with professionalism and respect for nature.
@@ -362,7 +362,7 @@ export default function App() {
             >
               <div>
                 <h3 className="text-2xl md:text-3xl font-semibold">Free on-site estimate in Greater Nashville</h3>
-                <p className="mt-2 opacity-90">Small, local crew • ISA-Member • Respect for your property</p>
+                <p className="mt-2 opacity-90">Small, local crew • ISA-Member • Licensed & Insured</p>
               </div>
               <a
                 href="tel:+13145360225"
@@ -389,16 +389,34 @@ export default function App() {
                   <a className="underline" href="https://instagram.com/cheathamtrees" target="_blank" style={{ color: palette.body }}>instagram.com/cheathamtrees</a>
                 </p>
               </div>
-              <form name="contact" method="POST" data-netlify="true" className="rounded-xl p-6" style={{ backgroundColor: palette.cardBg, border: `1px solid ${palette.border}` }}>
-                <input type="hidden" name="form-name" value="contact" />
+              <form
+                action="https://formspree.io/f/xanpbpal"
+                method="POST"
+                className="rounded-xl p-6"
+                style={{ backgroundColor: palette.cardBg, border: `1px solid ${palette.border}` }}
+              >
                 <h3 className="text-xl font-semibold" style={{ color: palette.body }}>Message</h3>
+
+                {/* optional: set the email subject you’ll see in your inbox */}
+                <input type="hidden" name="subject" value="Cheatham Trees — New Contact" />
+
+                {/* honeypot (spam trap). leave it exactly like this */}
+                <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex="-1" autoComplete="off" />
+
                 <div className="mt-4 grid gap-3">
-                  <input required name="name" placeholder="Your name" className="rounded-md px-3 py-2" style={{ border: `1px solid ${palette.border}`, backgroundColor: palette.sectionLight, color: palette.body }} />
-                  <input required type="email" name="email" placeholder="Email" className="rounded-md px-3 py-2" style={{ border: `1px solid ${palette.border}`, backgroundColor: palette.sectionLight, color: palette.body }} />
-                  <textarea required name="message" rows="5" placeholder="How can we help?" className="rounded-md px-3 py-2" style={{ border: `1px solid ${palette.border}`, backgroundColor: palette.sectionLight, color: palette.body }} />
-                  <button className="mt-2 px-4 py-2 rounded-md text-white" style={{ backgroundColor: palette.accent }}>Send</button>
+                  <input required name="name" placeholder="Your name" className="rounded-md px-3 py-2"
+                        style={{ border: `1px solid ${palette.border}`, backgroundColor: palette.sectionLight, color: palette.body }} />
+                  <input required type="email" name="email" placeholder="Email" className="rounded-md px-3 py-2"
+                        style={{ border: `1px solid ${palette.border}`, backgroundColor: palette.sectionLight, color: palette.body }} />
+                  <textarea required name="message" rows="5" placeholder="How can we help?"
+                            className="rounded-md px-3 py-2"
+                            style={{ border: `1px solid ${palette.border}`, backgroundColor: palette.sectionLight, color: palette.body }} />
+                  <button type="submit" className="mt-2 px-4 py-2 rounded-md text-white" style={{ backgroundColor: palette.accent }}>
+                    Send
+                  </button>
                 </div>
               </form>
+
             </div>
           </div>
         </section>
