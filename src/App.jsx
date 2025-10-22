@@ -200,31 +200,53 @@ export default function App() {
 
       {/* Hero */}
       <section id="top" className="relative">
-        <div className="relative h-[70svh] md:h-[70svh] xl:h-[80svh] 2xl:[90svh] overflow-hidden">
+        <div className="relative h-[60svh] md:h-[70vh] xl:h-[75vh] 2xl:[80vh] overflow-hidden">
           <div
             ref={heroRef}
-            className="absolute inset-0 will-change-form bg-cover bg-center bg-fixed scale-105"
+            className="absolute inset-0 will-change-form bg-cover bg-center bg-fixed"
             style={{ backgroundImage: "url('/images/header.jpg')"}}
             role="img"
             aria-label="Arborist safely removing tree branch"
           />
+
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster="/images/header.jpg"
+              className="
+                absolute inset-0 w-full h-full object-cover
+                opacity-0 transition-opacity duration-700
+                motion-reduce:hidden
+              "
+              onCanPlay={(e) => { e.currentTarget.classList.remove('opacity-0'); }}
+              aria-hidden="true"
+            >
+              <source src="/video/heroVideo.mp4" type="video/mp4" />
+            </video>
+
           {/* Soft overlay to harmonize with theme */}
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(180deg, ${hexWithAlpha(palette.sectionMid, 0.7)}, ${hexWithAlpha(palette.pageBgTo, 0.85)})`
+              background: `linear-gradient(180deg, ${hexWithAlpha(palette.sectionBrown, 0.3)}, ${hexWithAlpha(palette.heading, 0.25)})`
             }}
           />
 
               {/* Animated, scroll-drifting logo layer */}
+            
             <LogoMark
               src="images/cheatham-logo.svg"   // logo here
               corner="center"                 // "tl" | "tr" | "bl" | "br" | "center"
-              imgClassName="!w-[150vw] sm:!w-[150vw] md:!w-[160vw] lg:!w-[54vw] xl:!w-[52vw] 2xl:!w-[60vw] max-w-[2200px] h-auto"        // tweak: 96–160
+              imgClassName="!w-[150vw] sm:!w-[150vw] md:!w-[160vw] lg:!w-[54vw] xl:!w-[52vw] 2xl:!w-[60vw] max-w-[2200px] h-auto
+              drop-shadow-[0_6px_28px_rgba(255,255,255,0.75)] drop-shadow-[0_0_8px_rgba(0,0,0,0.30)]"        // tweak: 96–160
               offsetY={-6}
               parallax={0.12}                  // lower = subtler drift              
               popDuration={1500}
               scrim = {false}
+              
               //scrimColor={hexWithAlpha(palette.sectionLight, 0.82)}
               //scrimRing={hexWithAlpha(palette.border, 0.9)}
             />
