@@ -436,7 +436,7 @@ export default function App() {
         aria-label="International Society of Arboriculture Member"
         className="fixed right-4 bottom-4 z-40"
       >
-        <img src="images/isa.jpg" alt="ISA Member" className="w-16 h-16 md:w-20 md:h-20 drop-shadow" />
+        <img src="images/isa.jpg" alt="ISA Member" className="h-16 md:h-20 w-auto drop-shadow" />
       </a>
 
       {/* Dev theme helper (optional): quickly toggle themes by editing THEME constant) */}
