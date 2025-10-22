@@ -241,7 +241,7 @@ export default function App() {
               src="images/cheatham-logo.svg"   // logo here
               corner="center"                 // "tl" | "tr" | "bl" | "br" | "center"
               imgClassName="!w-[150vw] sm:!w-[150vw] md:!w-[160vw] lg:!w-[54vw] xl:!w-[52vw] 2xl:!w-[60vw] max-w-[2200px] h-auto
-              drop-shadow-[0_6px_28px_rgba(255,255,255,0.75)] drop-shadow-[0_0_8px_rgba(0,0,0,0.30)]"        // tweak: 96–160
+              drop-shadow-[0_6px_28px_rgba(0,0,0,0.25)] drop-shadow-[0_0_8px_rgba(0,0,0,0.95)]"        // tweak: 96–160
               offsetY={-6}
               parallax={0.12}                  // lower = subtler drift              
               popDuration={1500}
