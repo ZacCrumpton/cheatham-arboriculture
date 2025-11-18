@@ -261,9 +261,9 @@ export default function App() {
               Trees Are Our Passion.
             </h1>
             <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: palette.muted }}>
-              As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every project. Our licensed and insured team is dedicated to keeping your trees healthy, safe, and beautiful while supporting long-term sustainability for our enviornment.
+              As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every project. Our licensed and insured team is dedicated to keeping your trees healthy, safe, and beautiful while supporting long-term sustainability for our environment.
               <br></br>
-              <br></br>We are a small, close-knit crew that treats every propety as if it were our own. 
+              <br></br>We are a small, close-knit crew that treats every property as if it were our own. 
               Whether it's precision pruning, safe tree removal, or planting the next generation of saplings, we approach each job with professionalism and respect for nature.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
