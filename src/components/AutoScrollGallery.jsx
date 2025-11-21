@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 /**
- * Auto-scrolling, seamless (infinite) gallery tuned for PORTRAIT images.
+ * Auto-scrolling horizontal gallery tuned for PORTRAIT images.
  *
  * Props:
  *  - images: (string[] | { src, alt?, href? }[])
@@ -18,7 +18,7 @@ export default function AutoScrollGallery({
   images = [],
   speed = 60,
   gap = 12,
-  borderColor = "#ddd",
+  borderColor = "#ddd", // currently unused but kept for API compatibility
   pauseOnHover = true,
   showControls = true,
   itemWidthClasses = "w-[180px] sm:w-[200px] md:w-[240px]",
@@ -34,17 +34,13 @@ export default function AutoScrollGallery({
       .map((img) => (typeof img === "string" ? { src: img } : img));
   }, [images]);
 
-  const hasLoop = safeImages.length >= 2;
-  // Duplicate list (A + A) for seamless wrap
-  const track = useMemo(
-    () => (hasLoop ? [...safeImages, ...safeImages] : safeImages),
-    [hasLoop, safeImages]
-  );
+  const canAutoScroll = safeImages.length >= 2;
+  const track = safeImages;
 
-  // Auto-scroll ticker with wrap
+  // Auto-scroll ticker WITHOUT looping
   useEffect(() => {
     const el = containerRef.current;
-    if (!el || !hasLoop) return;
+    if (!el || !canAutoScroll) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
@@ -58,38 +54,48 @@ export default function AutoScrollGallery({
 
       if (!isPaused) {
         const pxPerMs = speed / 1000;
-        el.scrollLeft += pxPerMs * dt;
-        const half = el.scrollWidth / 2;
-        if (el.scrollLeft >= half) el.scrollLeft -= half; // seamless reset
+        const maxScrollLeft = el.scrollWidth - el.clientWidth;
+        const next = el.scrollLeft + pxPerMs * dt;
+
+        if (next >= maxScrollLeft) {
+          // Snap to the end and stop auto-scrolling
+          el.scrollLeft = maxScrollLeft;
+          return; // do NOT schedule another frame
+        } else {
+          el.scrollLeft = next;
+        }
       }
+
       rafId = requestAnimationFrame(step);
     };
 
     rafId = requestAnimationFrame(step);
 
-    // Keep scrollLeft modulo half-width on layout changes
+    // Keep scrollLeft within valid bounds on layout changes
     const onResize = () => {
-      const half = el.scrollWidth / 2;
-      if (half > 0) el.scrollLeft = el.scrollLeft % half;
+      const maxScrollLeft = el.scrollWidth - el.clientWidth;
+      if (maxScrollLeft > 0 && el.scrollLeft > maxScrollLeft) {
+        el.scrollLeft = maxScrollLeft;
+      }
     };
+
     const ro = new ResizeObserver(onResize);
     ro.observe(el);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
       ro.disconnect();
     };
-  }, [hasLoop, speed, isPaused]);
+  }, [canAutoScroll, speed, isPaused]);
 
-  // Pause autoplay when off-screen
+  // Pause autoplay when off-screen, resume when visible again
   useEffect(() => {
     const el = containerRef.current;
     if (!el || !("IntersectionObserver" in window)) return;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Pause when not visible
-          if (!entry.isIntersecting) setIsPaused(true);
+          setIsPaused(!entry.isIntersecting);
         });
       },
       { threshold: 0.01 }
@@ -147,7 +153,7 @@ export default function AutoScrollGallery({
                     <img
                       src={img.src}
                       alt={img.alt ?? ""}
-                      loading={i < safeImages.length ? "eager" : "lazy"}
+                      loading={i === 0 ? "eager" : "lazy"}
                       decoding="async"
                       draggable="false"
                       className="h-full w-full object-cover"
@@ -157,7 +163,7 @@ export default function AutoScrollGallery({
                   <img
                     src={img.src}
                     alt={img.alt ?? ""}
-                    loading={i < safeImages.length ? "eager" : "lazy"}
+                    loading={i === 0 ? "eager" : "lazy"}
                     decoding="async"
                     draggable="false"
                     className="h-full w-full object-cover"
@@ -170,7 +176,7 @@ export default function AutoScrollGallery({
       </div>
 
       {/* Controls (optional) */}
-      {showControls && hasLoop && (
+      {showControls && canAutoScroll && (
         <>
           <button
             type="button"

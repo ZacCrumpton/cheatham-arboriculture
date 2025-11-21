@@ -360,6 +360,9 @@ export default function App() {
               "images/cheathamArbor9.avif",
               "images/cheathamArbor3.avif",
               "images/cheathamArbor4.avif",
+              "images/11212025.avif",
+              "images/11212025_02.avif",
+              "images/11212025_03.avif",
             ]}
             borderColor={palette.border}
             speed={70}             // px/sec; tweak to taste
