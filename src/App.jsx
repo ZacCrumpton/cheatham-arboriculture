@@ -114,6 +114,9 @@ function useParallaxRelative(speed = 0.25, containerRef) {
 }
 
 export default function App() {
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const palette = PALETTES[THEME];
 
   const sections = useMemo(() => [
@@ -199,92 +202,135 @@ export default function App() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="relative">
-        <div className="relative h-[60svh] md:h-[70vh] xl:h-[75vh] 2xl:[80vh] overflow-hidden">
-          <div
-            ref={heroRef}
-            className="absolute inset-0 will-change-form bg-cover bg-center bg-fixed"
-            style={{ backgroundImage: "url('/images/header.jpg')"}}
-            role="img"
-            aria-label="Arborist safely removing tree branch"
-          />
+<section id="top" className="relative">
+  {/* Video + overlay */}
+  <div className="relative h-[60svh] md:h-[70vh] xl:h-[75vh] 2xl:[80vh] overflow-hidden">
+    <div
+      ref={heroRef}
+      className="absolute inset-0 will-change-transform bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: "url('/images/header.jpg')" }}
+      role="img"
+      aria-label="Arborist safely removing tree branch"
+    />
 
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              poster="/images/header.jpg"
-              className="
-                absolute inset-0 w-full h-full object-cover
-                opacity-0 transition-opacity duration-700
-                motion-reduce:hidden
-              "
-              onCanPlay={(e) => { e.currentTarget.classList.remove('opacity-0'); }}
-              aria-hidden="true"
-            >
-              <source src="/video/heroVideo.mp4" type="video/mp4" />
-            </video>
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      poster="/images/header.jpg"
+      className="
+        absolute inset-0 w-full h-full object-cover
+        opacity-0 transition-opacity duration-700
+        motion-reduce:hidden
+      "
+      onCanPlay={(e) => {
+        e.currentTarget.classList.remove("opacity-0");
+      }}
+      aria-hidden="true"
+    >
+      <source src="/video/heroVideo.mp4" type="video/mp4" />
+    </video>
 
-          {/* Soft overlay to harmonize with theme */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(180deg, ${hexWithAlpha(palette.sectionBrown, 0.3)}, ${hexWithAlpha(palette.heading, 0.25)})`
-            }}
-          />
+    {/* Soft overlay */}
+    <div
+      className="absolute inset-0"
+      style={{
+        background: `linear-gradient(180deg, ${hexWithAlpha(
+          palette.sectionBrown,
+          0.3
+        )}, ${hexWithAlpha(palette.heading, 0.25)})`,
+      }}
+    />
+  </div>
 
-              {/* Animated, scroll-drifting logo layer */}
-            
-            <LogoMark
-              src="images/cheatham-logo.svg"   // logo here
-              corner="center"                 // "tl" | "tr" | "bl" | "br" | "center"
-              imgClassName="!w-[150vw] sm:!w-[150vw] md:!w-[160vw] lg:!w-[54vw] xl:!w-[52vw] 2xl:!w-[60vw] max-w-[2200px] h-auto
-              drop-shadow-[0_6px_28px_rgba(0,0,0,0.25)] drop-shadow-[0_0_8px_rgba(0,0,0,0.95)]"        // tweak: 96–160
-              offsetY={-6}
-              parallax={0.12}                  // lower = subtler drift              
-              popDuration={1500}
-              scrim = {false}
-              
-              //scrimColor={hexWithAlpha(palette.sectionLight, 0.82)}
-              //scrimRing={hexWithAlpha(palette.border, 0.9)}
-            />
+  {/* Logo banner + intro card */}
+  <div className="max-w-7xl mx-auto px-4 -mt-28 md:-mt-30 relative pb-10">
+  
 
-        </div>
-        <div className="max-w-7xl mx-auto px-4 -mt-28 md:-mt-36 relative pb-10">
-          <div
-            className="rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,.08)] p-6 md:p-10"
-            style={{ backgroundColor: hexWithAlpha(palette.cardBg, 0.95), border: `1px solid ${palette.border}` }}
-          >
-            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight" style={{ color: palette.heading }}>
-              Trees Are Our Passion.
-            </h1>
-            <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: palette.muted }}>
-              As proud members of the International Society of Arboriculture (ISA), we bring knowledge, skill, and care to every project. Our licensed and insured team is dedicated to keeping your trees healthy, safe, and beautiful while supporting long-term sustainability for our environment.
-              <br></br>
-              <br></br>We are a small, close-knit crew that treats every property as if it were our own. 
-              Whether it's precision pruning, safe tree removal, or planting the next generation of saplings, we approach each job with professionalism and respect for nature.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="tel:+13145360225"
-                className="px-5 py-3 rounded-xl shadow hover:shadow-md transition-shadow"
-                style={{ backgroundColor: palette.accent, color: "#FFFFFF" }}
-              >
-                Call / Text for Free Estimate
-              </a>
-              <a
-                href="#contact"
-                className="px-5 py-3 rounded-xl border hover:opacity-90"
-                style={{ borderColor: palette.body, color: palette.body, backgroundColor: hexWithAlpha(palette.sectionLight, 0.8) }}
-              >
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+
+
+{/* Intro card */}
+<div
+  className="
+    mt-8 rounded-2xl
+    shadow-[0_12px_40px_rgba(0,0,0,.08)]
+    p-6 md:p-10
+    relative overflow-hidden
+  "
+  style={{
+    backgroundColor: hexWithAlpha(palette.cardBg, 0.95),
+    border: `1px solid ${palette.border}`,
+  }}
+>
+
+  {/* Background Logo */}
+  <div
+    className="
+      absolute inset-0
+      bg-no-repeat bg-center bg-contain
+      pointer-events-none
+    "
+    style={{
+      backgroundImage: "url('/images/cheatham-logo.svg')",
+      opacity: 0.12,
+      transform: "scale(0.9)",
+    }}
+    aria-hidden="true"
+  />
+
+  {/* Foreground Content */}
+  <div className="relative z-10">
+    <h1
+      className="text-3xl md:text-5xl font-semibold tracking-tight"
+      style={{ color: palette.heading }}
+    >
+      Trees Are Our Passion.
+    </h1>
+
+    <p
+      className="mt-3 max-w-3xl leading-relaxed"
+      style={{ color: palette.muted }}
+    >
+      As proud members of the International Society of Arboriculture (ISA),
+      we bring knowledge, skill, and care to every project. Our licensed and
+      insured team is dedicated to keeping your trees healthy, safe, and
+      beautiful while supporting long-term sustainability for our environment.
+      <br />
+      <br />
+      We are a small, close-knit crew that treats every property as if it were
+      our own. Whether it's precision pruning, safe tree removal, or planting
+      the next generation of saplings, we approach each job with
+      professionalism and respect for nature.
+    </p>
+
+    <div className="mt-6 flex flex-wrap gap-3">
+      <a
+        href="tel:+13145360225"
+        className="px-5 py-3 rounded-xl shadow hover:shadow-md transition-shadow"
+        style={{ backgroundColor: palette.accent, color: "#FFFFFF" }}
+      >
+        Call / Text for Free Estimate
+      </a>
+
+      <a
+        href="#contact"
+        className="px-5 py-3 rounded-xl border hover:opacity-90"
+        style={{
+          borderColor: palette.body,
+          color: palette.body,
+          backgroundColor: hexWithAlpha(palette.sectionLight, 0.8),
+        }}
+      >
+        Contact
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
 
       <main id="main">
 
@@ -345,33 +391,187 @@ export default function App() {
           </div>
         </section>
 
-        {/* Gallery */}
-        <section id="gallery" className="scroll-mt-28 py-16">
-          <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: palette.heading }}>
-            Recent Work
-          </h2>
-          </div>
-          <AutoScrollGallery
-            images={[
-              "images/cheathamArbor1.avif",
-              "images/cheathamArbor2.avif",
-              "images/cheathamArbor8.avif",
-              "images/cheathamArbor9.avif",
-              "images/cheathamArbor3.avif",
-              "images/cheathamArbor4.avif",
-              "images/11212025.avif",
-              "images/11212025_02.avif",
-              "images/11212025_03.avif",
-            ]}
-            borderColor={palette.border}
-            speed={70}             // px/sec; tweak to taste
-            gap={12}               // px between cards
-            showControls={true}    // keep the arrows
-            // itemWidthClasses="w-[180px] sm:w-[200px] md:w-[240px]" // (same as default)
-          />
-          
-        </section>
+       {/* Gallery */}
+<section id="gallery" className="scroll-mt-28 py-20">
+  <div className="max-w-7xl mx-auto px-4">
+
+    {/* Heading */}
+    <div className="max-w-2xl mb-12">
+      <h2
+        className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: palette.heading }}
+      >
+        Recent Work
+      </h2>
+
+      <p
+        className="mt-4 text-lg leading-relaxed"
+        style={{ color: palette.muted }}
+      >
+        From precision pruning to full removals, we approach every project
+        with safety, professionalism, and respect for the landscape.
+      </p>
+    </div>
+
+    {/* Masonry Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px]">
+
+      {/* Large Hero Image */}
+      <div
+        className="
+          md:col-span-7 md:row-span-2
+          rounded-3xl overflow-hidden
+          relative group cursor-pointer
+        "
+        onClick={() => setSelectedImage("images/cheathamArbor1.avif")}
+      >
+        <img
+          src="images/cheathamArbor1.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.05))",
+          }}
+        />
+
+        <div className="absolute bottom-0 left-0 p-6">
+          <p className="text-white text-xl font-semibold">
+            
+          </p>
+        </div>
+      </div>
+
+      {/* Small Right Image */}
+      <div
+        className="
+          md:col-span-5
+          rounded-3xl overflow-hidden
+          relative group cursor-pointer
+        "
+        onClick={() => setSelectedImage("images/cheathamArbor2.avif")}
+      >
+        <img
+          src="images/cheathamArbor2.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+      </div>
+
+      {/* Small Right Image */}
+      <div
+        className="
+          md:col-span-5
+          rounded-3xl overflow-hidden
+          relative group cursor-pointer
+        "
+        onClick={() => setSelectedImage("images/cheathamArbor3.avif")}
+      >
+        <img
+          src="images/cheathamArbor3.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+      </div>
+
+      {/* Wide Bottom Image */}
+      <div
+        className="
+          md:col-span-8
+          rounded-3xl overflow-hidden
+          relative group cursor-pointer
+        "
+        onClick={() => setSelectedImage("images/cheathamArbor4.avif")}
+      >
+        <img
+          src="images/11212025.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+      </div>
+
+      {/* Tall Vertical Image */}
+      <div
+        className="
+          md:col-span-4 md:row-span-2
+          rounded-3xl overflow-hidden
+          relative group cursor-pointer
+        "
+        onClick={() => setSelectedImage("images/cheathamArbor5.avif")}
+      >
+        <img
+          src="images/cheathamArbor8.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+      </div>
+
+      {/* Bottom Left */}
+      <div
+        className="
+          md:col-span-4
+          rounded-3xl overflow-hidden
+          relative group cursor-pointer
+        "
+        onClick={() => setSelectedImage("images/11212025_02.avif")}
+      >
+        <img
+          src="images/11212025_02.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+      </div>
+
+      {/* Bottom Middle */}
+      <div
+        className="
+          md:col-span-4
+          rounded-3xl overflow-hidden
+          relative group
+        "
+        onClick={() => setSelectedImage("images/11212025_03.avif")}
+      >
+        <img
+          src="images/11212025_03.avif"
+          alt=""
+          className="
+            w-full h-full object-cover
+            transition-transform duration-700
+            group-hover:scale-[1.03]
+          "
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
           
 
 
@@ -408,7 +608,7 @@ export default function App() {
               <div className="rounded-xl p-6" style={{ backgroundColor: palette.cardBg, border: `1px solid ${palette.border}` }}>
                 <p style={{ color: palette.muted }}>
                   Aaron Cheatham<br />
-                  439 Capri Dr Unit B, Nashville, TN 37209<br />
+                  3213 Leswood Ln, Nashville, TN 37207<br />
                   <a className="underline" href="tel:+13145360225" style={{ color: palette.body }}>(314) 536-0225</a><br />
                   <a className="underline" href="mailto:aaron@cheathamtrees.com" style={{ color: palette.body }}>aaron@cheathamtrees.com</a><br />
                   <a className="underline" href="https://instagram.com/cheathamtrees" target="_blank" style={{ color: palette.body }}>instagram.com/cheathamtrees</a>
@@ -466,6 +666,42 @@ export default function App() {
 
       {/* Dev theme helper (optional): quickly toggle themes by editing THEME constant) */}
       <div className="fixed left-2 bottom-2 text-xs opacity-60 select-none" title={`Theme: ${palette.name}`}></div>
+
+              {/* Image Modal */}
+{selectedImage && (
+  <div
+    className="
+      fixed inset-0 z-[100]
+      bg-black/80 backdrop-blur-sm
+      flex items-center justify-center
+      p-4
+    "
+    onClick={() => setSelectedImage(null)}
+  >
+    <img
+      src={selectedImage}
+      alt=""
+      className="
+        max-w-full max-h-full
+        object-contain
+        rounded-2xl
+        shadow-2xl
+      "
+    />
+
+    {/* Close button */}
+    <button
+      className="
+        absolute top-6 right-6
+        text-white text-4xl
+        leading-none
+      "
+    >
+      ×
+    </button>
+  </div>
+)}
+
     </div>
   );
 }
