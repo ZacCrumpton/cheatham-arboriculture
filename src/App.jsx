@@ -246,9 +246,24 @@ export default function App() {
   </div>
 
   {/* Logo banner + intro card */}
-  <div className="max-w-7xl mx-auto px-4 -mt-28 md:-mt-30 relative pb-10">
+  <div className="max-w-7xl mx-auto px-4 -mt-28 md:-mt-80 relative pb-10">
   
-
+{/* Logo banner between hero video and intro copy */}
+<div className="flex justify-center -mb-24 relative z-10">
+  <div>
+    <div
+      className=" bg-no-repeat bg-contain bg-center
+    relative bottom-60"
+      style={{
+        width: "560px",
+        height: "420px",
+        backgroundImage: "url('/images/cheatham-logo.svg')",
+      }}
+      aria-label="Cheatham Arboriculture logo"
+      role="img"
+    />
+  </div>
+</div>
 
 
 {/* Intro card */}
@@ -265,23 +280,7 @@ export default function App() {
   }}
 >
 
-  {/* Background Logo */}
-  <div
-    className="
-      absolute inset-0
-      bg-no-repeat bg-center bg-contain
-      pointer-events-none
-    "
-    style={{
-      backgroundImage: "url('/images/cheatham-logo.svg')",
-      opacity: 0.12,
-      transform: "scale(0.9)",
-    }}
-    aria-hidden="true"
-  />
-
-  {/* Foreground Content */}
-  <div className="relative z-10">
+ 
     <h1
       className="text-3xl md:text-5xl font-semibold tracking-tight"
       style={{ color: palette.heading }}
@@ -327,8 +326,7 @@ export default function App() {
       </a>
     </div>
   </div>
-</div>
-</div>
+  </div>
 </section>
 
 
