@@ -249,29 +249,31 @@ export default function App() {
   <div className="max-w-7xl mx-auto px-4 -mt-28 md:-mt-80 relative pb-10">
   
 {/* Logo banner between hero video and intro copy */}
-<div className="flex justify-center -mb-24 relative z-10">
-  <div>
-    <div
-      className="bg-no-repeat bg-contain bg-center
-        relative
+<div className="flex justify-center relative z-10">
+  <div
+    className="
+      bg-no-repeat bg-contain bg-center
+      relative
 
-        w-[280px] h-[180px]
-        
+      w-full
+      max-w-[380px]
+      h-[220px]
 
-        sm:w-[340px] sm:h-[220px]
-        
+      sm:max-w-[420px]
+      sm:h-[260px]
 
-        md:w-[560px] md:h-[420px]
-        
-      "
-      style={{
-        backgroundImage: "url('/images/cheatham-logo.svg')",
-        transform: "translateY(-150px)"
-      }}
-      aria-label="Cheatham Arboriculture logo"
-      role="img"
-    />
-  </div>
+      md:max-w-[400px]
+      md:h-[420px]
+
+      -translate-y-[30px]
+      md:-translate-y-[150px]
+    "
+    style={{
+      backgroundImage: "url('/images/cheatham-logo.svg')",
+    }}
+    aria-label="Cheatham Arboriculture logo"
+    role="img"
+  />
 </div>
 
 
@@ -282,6 +284,9 @@ export default function App() {
     shadow-[0_12px_40px_rgba(0,0,0,.08)]
     p-6 md:p-10
     relative overflow-hidden
+
+    -translate-y-[50px]
+    md:-translate-y-[200px]
   "
   style={{
     backgroundColor: hexWithAlpha(palette.cardBg, 0.95),
