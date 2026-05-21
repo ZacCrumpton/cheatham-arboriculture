@@ -252,12 +252,21 @@ export default function App() {
 <div className="flex justify-center -mb-24 relative z-10">
   <div>
     <div
-      className=" bg-no-repeat bg-contain bg-center
-    relative bottom-60"
+      className="bg-no-repeat bg-contain bg-center
+        relative
+
+        w-[280px] h-[180px]
+        
+
+        sm:w-[340px] sm:h-[220px]
+        
+
+        md:w-[560px] md:h-[420px]
+        
+      "
       style={{
-        width: "560px",
-        height: "420px",
         backgroundImage: "url('/images/cheatham-logo.svg')",
+        transform: "translateY(-150px)"
       }}
       aria-label="Cheatham Arboriculture logo"
       role="img"
@@ -454,10 +463,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/cheathamArbor2.avif")}
+        onClick={() => setSelectedImage("images/WIP.jpg")}
       >
         <img
-          src="images/cheathamArbor2.avif"
+          src="images/WIP.jpg"
           alt=""
           className="
             w-full h-full object-cover
@@ -474,10 +483,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/cheathamArbor3.avif")}
+        onClick={() => setSelectedImage("images/AfterWIP.jpg")}
       >
         <img
-          src="images/cheathamArbor3.avif"
+          src="images/AfterWIP.jpg"
           alt=""
           className="
             w-full h-full object-cover
@@ -497,7 +506,7 @@ export default function App() {
         onClick={() => setSelectedImage("images/cheathamArbor4.avif")}
       >
         <img
-          src="images/11212025.avif"
+          src="images/cheathamArbor4.avif"
           alt=""
           className="
             w-full h-full object-cover
@@ -517,7 +526,7 @@ export default function App() {
         onClick={() => setSelectedImage("images/cheathamArbor5.avif")}
       >
         <img
-          src="images/cheathamArbor8.avif"
+          src="images/cheathamArbor5.avif"
           alt=""
           className="
             w-full h-full object-cover
