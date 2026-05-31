@@ -198,6 +198,13 @@ export default function App() {
               </a>
             ))}
           </nav>
+          <a
+        href="tel:+13145360225"
+        className="px-5 py-3 rounded-xl shadow hover:shadow-md transition-shadow"
+        style={{ backgroundColor: "yellow", color: "#243026" }}
+      >
+        Call / Text for Free Estimate
+      </a>
         </div>
       </header>
 
@@ -347,16 +354,17 @@ export default function App() {
       <main id="main">
 
         {/* Services */}
-        <section id="services" className="scroll-mt-28 py-4">
+        <section id="services" className="scroll-mt-28 md:-mt-48 sm:10 py-4">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight" style={{ color: "#FFFFFF" }}>Services</h2>
             <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[ 
                 { t:"Tree Trimming & Pruning", d:"Encouraging healthy growth and enhancing safety." },
-                { t:"Tree Removals & Brush Hauling", d:"Safe, efficient clearing with complete cleanup." },
+                { t:"Tree Removal & Brush Clearing", d:"Safe, efficient clearing with complete cleanup." },
                 { t:"Storm Damage Cleanup", d:"Fast reliable response when you need it most." },
                 { t:"Stump Grinding", d:"Removing hazards and making way for new growth." },
-                { t:"Sapling Planting & Care", d:"Helping young trees thrive for years to come." },
+                { t:"Tree Planting & Care", d:"Helping your trees thrive for years to come." },
+                
               ].map((s) => (
                 <div
                   key={s.t}
@@ -380,7 +388,7 @@ export default function App() {
               {[
                 { n: 1, t: "Assess", d: "On-site walk-through with an ISA-Member arborist." },
                 { n: 2, t: "Plan", d: "Clear scope, price, and timeline before work begins." },
-                { n: 3, t: "Perform & Clean", d: "Rigged removals, careful pruning, thorough cleanup." },
+                { n: 3, t: "Perform & Clean", d: "Advanced climbing and rigging techniques to properly prune and remove limbs in accordance with the most modern ISA standards." },
               ].map(({ n, t, d }) => (
                 <li key={n} className="flex items-start gap-4">
                   <span
@@ -434,10 +442,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/cheathamArbor1.avif")}
+        onClick={() => setSelectedImage("images/CheathamTree03.jpg")}
       >
         <img
-          src="images/cheathamArbor1.avif"
+          src="images/CheathamTree03.jpg"
           alt=""
           className="
             w-full h-full object-cover
@@ -468,10 +476,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/WIP.jpg")}
+        onClick={() => setSelectedImage("images/CheathamTree04.jpg")}
       >
         <img
-          src="images/WIP.jpg"
+          src="images/CheathamTree04.jpg"
           alt=""
           className="
             w-full h-full object-cover
@@ -488,10 +496,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/AfterWIP.jpg")}
+        onClick={() => setSelectedImage("images/CheathamTree05.jpeg")}
       >
         <img
-          src="images/AfterWIP.jpg"
+          src="images/CheathamTree05.jpeg"
           alt=""
           className="
             w-full h-full object-cover
@@ -508,10 +516,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/cheathamArbor4.avif")}
+        onClick={() => setSelectedImage("images/CheathamTree06.jpeg")}
       >
         <img
-          src="images/cheathamArbor4.avif"
+          src="images/CheathamTree06.jpeg"
           alt=""
           className="
             w-full h-full object-cover
@@ -528,10 +536,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/cheathamArbor5.avif")}
+        onClick={() => setSelectedImage("images/CheathamTreeBA.jpg")}
       >
         <img
-          src="images/cheathamArbor5.avif"
+          src="images/CheathamTreeBA.jpg"
           alt=""
           className="
             w-full h-full object-cover
@@ -548,10 +556,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group cursor-pointer
         "
-        onClick={() => setSelectedImage("images/11212025_02.avif")}
+        onClick={() => setSelectedImage("images/CheathamTree07.jpeg")}
       >
         <img
-          src="images/11212025_02.avif"
+          src="images/CheathamTree07.jpeg"
           alt=""
           className="
             w-full h-full object-cover
@@ -568,10 +576,10 @@ export default function App() {
           rounded-3xl overflow-hidden
           relative group
         "
-        onClick={() => setSelectedImage("images/11212025_03.avif")}
+        onClick={() => setSelectedImage("images/CheathamTree08.jpg")}
       >
         <img
-          src="images/11212025_03.avif"
+          src="images/CheathamTree08.jpg"
           alt=""
           className="
             w-full h-full object-cover
